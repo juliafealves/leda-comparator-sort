@@ -23,4 +23,14 @@ public abstract class AbstractSorting<T extends Comparable<T>> implements
 	 */
 	public abstract void sort(T[] array, int leftIndex, int rightIndex);
 
+	public boolean validateParameters(T[] array, int leftIndex, int rightIndex){
+	    boolean validated = true;
+
+		if (array == null || leftIndex > rightIndex || array.length <= 0 || rightIndex >= array.length || leftIndex < 0){
+		    validated = false;
+        }
+
+        return validated;
+	}
+
 }

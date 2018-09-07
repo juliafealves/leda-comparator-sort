@@ -1,6 +1,7 @@
 package sorting.variationsOfSelectionsort;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 /**
  * This algorithm applies two selection sorts simultaneously. In a same
@@ -11,10 +12,44 @@ import sorting.AbstractSorting;
  * iteration does the same from index 1 to index N-2. And so on. The execution
  * continues until the array is completely ordered.
  */
-public class SimultaneousSelectionsort<T extends Comparable<T>> extends
-		AbstractSorting<T> {
-	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
-	}
+public class SimultaneousSelectionsort<T extends Comparable<T>> extends AbstractSorting<T> {
+
+    /**
+     * Implemented
+     * @param array
+     *            the target of the sorting algorithm
+     * @param leftIndex
+     *            where the sorting should begin
+     * @param rightIndex
+     */
+    @Override
+    public void sort(T[] array, int leftIndex, int rightIndex) {
+        if (this.validateParameters(array, leftIndex, rightIndex)) {
+            int k = 0;
+
+            for (int i = leftIndex; i < rightIndex - k; i++) {
+                int limit = rightIndex - k;
+                int min = i;
+
+                for (int j = i + 1; j <= limit; j++) {
+                    if (array[j].compareTo(array[min]) < 0) {
+                        min = j;
+                    }
+                }
+
+                Util.swap(array, i, min);
+
+                int max = i + 1;
+
+                for (int j = max + 1; j <= limit; j++) {
+                    if (array[j].compareTo(array[max]) > 0) {
+                        max = j;
+                    }
+                }
+
+                Util.swap(array, limit, max);
+                k++;
+            }
+        }
+    }
 }
